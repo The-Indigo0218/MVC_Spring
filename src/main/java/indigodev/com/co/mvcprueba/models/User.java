@@ -28,10 +28,13 @@ public class User {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    private String password;
+
     public User(String name, String lastName) {
         this.name = name;
         this.lastName = lastName;
     }
+
 
     @PrePersist
     public void prePersist(){
