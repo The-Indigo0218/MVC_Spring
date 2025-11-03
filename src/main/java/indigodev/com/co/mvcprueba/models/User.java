@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "users")
-public class User {
+public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,19 +25,10 @@ public class User {
     @Column(unique = true)
     private String userName;
 
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
-
     private String password;
 
     public User(String name, String lastName) {
         this.name = name;
         this.lastName = lastName;
-    }
-
-
-    @PrePersist
-    public void prePersist(){
-        this.createdAt = LocalDateTime.now();
     }
 }
