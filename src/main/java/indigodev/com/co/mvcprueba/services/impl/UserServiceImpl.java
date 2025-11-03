@@ -4,18 +4,16 @@ import indigodev.com.co.mvcprueba.exceptions.ResourceNotFoundException;
 import indigodev.com.co.mvcprueba.models.User;
 import indigodev.com.co.mvcprueba.repositories.UserRepository;
 import indigodev.com.co.mvcprueba.services.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository repository;
-
-    public UserServiceImpl(UserRepository repository) {
-        this.repository = repository;
-    }
 
     @Transactional(readOnly = true)
     @Override
