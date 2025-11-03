@@ -16,12 +16,11 @@ public class User extends BaseEntity {
 
     private String name;
     private String lastName;
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
-
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String userName;
-
+    @Column(nullable = false)
     private String password;
 
     public User(String name, String lastName) {
