@@ -1,5 +1,6 @@
 package indigodev.com.co.mvcprueba.services.impl;
 
+import indigodev.com.co.mvcprueba.exceptions.ResourceNotFoundException;
 import indigodev.com.co.mvcprueba.models.User;
 import indigodev.com.co.mvcprueba.repositories.UserRepository;
 import indigodev.com.co.mvcprueba.services.UserService;
@@ -7,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -25,8 +25,8 @@ public class UserServiceImpl implements UserService {
 
     @Transactional(readOnly = true)
     @Override
-    public Optional<User> findById(long id) {
-        return repository.findById(id);
+    public User findById(long id) {
+        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
     }
 
     @Transactional

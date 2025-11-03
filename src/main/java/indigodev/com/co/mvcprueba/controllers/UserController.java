@@ -1,6 +1,5 @@
 package indigodev.com.co.mvcprueba.controllers;
 
-import indigodev.com.co.mvcprueba.exceptions.ResourceNotFoundException;
 import indigodev.com.co.mvcprueba.models.User;
 import indigodev.com.co.mvcprueba.services.UserService;
 import org.springframework.stereotype.Controller;
@@ -43,7 +42,7 @@ public class UserController {
     @GetMapping("/form/{id}")
     public String form(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
         model.addAttribute("title", "User save");
-        User user = userService.findById(id).orElseThrow(() -> new ResourceNotFoundException("User no found with id: " + id));
+        User user = userService.findById(id);
         model.addAttribute("user", user);
         redirectAttributes.addFlashAttribute("user", user);
         return "form";
@@ -52,15 +51,15 @@ public class UserController {
     @PostMapping("/form")
     public String form(User user, Model model, RedirectAttributes redirectAttributes) {
         model.addAttribute("title", "User save");
-        userService.save(user);
-        String message = user.getId() == null ? "User has been saved" : "User was updated";
+        User userSave = userService.save(user);
+        String message = user.getId() == null ? "User has been saved" : "User was updated with id: " + userSave.getId();
         redirectAttributes.addFlashAttribute("message", message);
         return "redirect:/app/";
     }
 
     @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
-        User user = userService.findById(id).orElseThrow(() -> new ResourceNotFoundException("User no found with id: " + id));
+        User user = userService.findById(id);
         userService.delete(user);
         redirectAttributes.addFlashAttribute("message", "User deleted successfully");
         return "redirect:/app/";
