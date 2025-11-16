@@ -11,7 +11,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 
 @MappedSuperclass // No es una entidad propia, solo sirve para herencia
-@EntityListeners(AuditingEntityListener.class) // Hace que Spring/JPA maneje los campos
+@EntityListeners(AuditingEntityListener.class) // Hace que Spring/JPA maneje los campos de fechas automaticamente
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
